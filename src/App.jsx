@@ -16,15 +16,46 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const App = function (props) {
+  const [input, setInput] = React.useState(''); //Store the input in the input box
+
+  const handleChange = function(event){
+    setInput(event.target.value);
+  };
+  const handleAdd = function(){
+    console.log('ADDING')
+    setInput('');
+    props.addItem(input);
+  };
   return (
-    <div className="App-container">
-      <h1>My Wishlist</h1>
-      {props.wishList}
-      <button onClick={()=>{props.addItem('Hello')}}>ADD</button>
-    </div>
+      <div className="wrapper">
+      <Wishlist items={props.wishList}/>
+      <input value={input} onChange={(e) => {handleChange(e)}}/>
+      <button onClick={()=>{handleAdd()}}>ADD</button>
+      </div>
+  
   );
 };
 
+const Wishlist = function(props){
 
+  const generateList = () => {
+    return props.items.map((item) => {
+      return <WishlistItem item />
+    })
+  }
+  return(
+    <div>
+      {props.items}
+    </div>
+  )
+}
+
+const WishlistItem = function(props){
+  return(
+    <li>
+      {props.item}
+    </li>
+  )
+}
 
 export default connect(mapStateToProps, mapDispatchToProps) (App);
