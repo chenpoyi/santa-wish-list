@@ -26,36 +26,31 @@ const App = function (props) {
     setInput('');
     props.addItem(input);
   };
+
+  const generateList = () => {
+    return props.wishList.map((item) => {
+      return <li>
+      {item}
+    </li>
+    })
+  };
+
   return (
       <div className="wrapper">
-      <Wishlist items={props.wishList}/>
+        <h1>My Wishlist</h1>
+      <div className="wishlist">
+        <ul>
+        {generateList()}
+        </ul>
+      </div>
       <input value={input} onChange={(e) => {handleChange(e)}}/>
-      <button onClick={()=>{handleAdd()}}>ADD</button>
+      <button id={'add-button'} onClick={()=>{handleAdd()}}>ADD</button>
+      <button id={'submit-button'}>SUBMIT</button>
       </div>
   
   );
 };
 
-const Wishlist = function(props){
 
-  const generateList = () => {
-    return props.items.map((item) => {
-      return <WishlistItem item />
-    })
-  }
-  return(
-    <div>
-      {props.items}
-    </div>
-  )
-}
-
-const WishlistItem = function(props){
-  return(
-    <li>
-      {props.item}
-    </li>
-  )
-}
 
 export default connect(mapStateToProps, mapDispatchToProps) (App);
