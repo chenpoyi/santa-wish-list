@@ -15,10 +15,15 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         wishList: [...state.wishList, action.payload],
       };
-    // case DELETE_ITEM: //Remove selected item from wishlist
-    //   return {
-    //     wishList: ,
-    //   };
+    case DELETE_ITEM: //Remove selected item from wishlist
+    console.log('payload:', action.payload);
+    console.log('wishlist:', state.wishList)
+      const itemIndex = state.wishList.indexOf(action.payload)
+      console.log('to delete:', itemIndex);
+      return {
+        wishList: [ ...state.wishList.slice(0, itemIndex),
+          ...state.wishList.slice(itemIndex + 1)],
+      };
     default: //Return unchanged state by default
       return {
         wishList: state.wishList ,

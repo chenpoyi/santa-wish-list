@@ -43,6 +43,15 @@ h1 {
   height: 200px;
   border: 2px solid black;
 }
+.wishlist > ul {
+  list-style-type: none;
+  padding: 0px;
+
+}
+.wishlist-item{
+  text-align: left;
+  margin: 10px;
+}
 input {
   height: 30px;
   border: 2px solid black;
