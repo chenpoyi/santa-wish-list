@@ -10,17 +10,18 @@ const INITIAL_STATE = {
 // Complete the three cases below
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ADD_ITEM:
+    case ADD_ITEM: //Add new item to wishlist
+      console.log('HELLO:', action)
       return {
-        wishList: ,
+        wishList: [...state.wishList, action.payload],
       };
-    case DELETE_ITEM:
+    // case DELETE_ITEM: //Remove selected item from wishlist
+    //   return {
+    //     wishList: ,
+    //   };
+    default: //Return unchanged state by default
       return {
-        wishList: ,
-      };
-    default:
-      return {
-        wishList: ,
+        wishList: state.wishList ,
       };
   }
 };
