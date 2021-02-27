@@ -16,41 +16,51 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const App = function (props) {
-  const [input, setInput] = React.useState(''); //Store the input in the input box
+  const [input, setInput] = React.useState(""); //Store the input in the input box
 
-  const handleChange = function(event){
+  //When user types in the input field
+  const handleChange = function (event) {
     setInput(event.target.value);
   };
-  const handleAdd = function(){
-    console.log('ADDING')
-    setInput('');
-    props.addItem(input);
+  //When user clicks the add button
+  const handleAdd = function () {
+    console.log("ADDING");
+    if (input.length > 0) {
+      setInput("");
+      props.addItem(input);
+    }
   };
 
+  //Generate the list of items in the wishlist based on the wishlist prop
   const generateList = () => {
     return props.wishList.map((item) => {
-      return <li>
-      {item}
-    </li>
-    })
+      return <li>{item}</li>;
+    });
   };
 
   return (
-      <div className="wrapper">
-        <h1>My Wishlist</h1>
+    <div className="wrapper">
+      <h1>My Wishlist</h1>
       <div className="wishlist">
-        <ul>
-        {generateList()}
-        </ul>
+        <ul>{generateList()}</ul>
       </div>
-      <input value={input} onChange={(e) => {handleChange(e)}}/>
-      <button id={'add-button'} onClick={()=>{handleAdd()}}>ADD</button>
-      <button id={'submit-button'}>SUBMIT</button>
-      </div>
-  
+      <input
+        value={input}
+        onChange={(e) => {
+          handleChange(e);
+        }}
+      />
+      <button
+        id={"add-button"}
+        onClick={() => {
+          handleAdd();
+        }}
+      >
+        ADD
+      </button>
+      <button id={"submit-button"}>SUBMIT</button>
+    </div>
   );
 };
 
-
-
-export default connect(mapStateToProps, mapDispatchToProps) (App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
