@@ -24,46 +24,40 @@ const App = function (props) {
   };
   //When user clicks the add button
   const handleAdd = function () {
-    console.log("ADDING");
-    if (input.length > 0 && !checkDuplicate()) {
-      props.addItem(input);
-    }
+    input.length > 0 && !checkDuplicate() ? props.addItem(input) : alert('This item is a duplicate!');
     setInput("");
   };
 
   //when user clicks the submit button
   const handleSubmit = function () {
     //Loops through each item in the list and deletes them.
-    if(props.wishList.length > 0){
-      alert('Wish list submitted to Santa!')
-    props.wishList.forEach((item) => {
-      props.deleteItem(item);
-    })
+    if (props.wishList.length > 0) {
+      alert("Wish list submitted to Santa!");
+      props.wishList.forEach((item) => {
+        props.deleteItem(item);
+      });
     } else {
-      alert('Your wishlist is empty!')
+      alert("Your wishlist is empty!");
     }
-    
   };
 
   //when user clicks list item
-  const handleClick = function(e) {
-    console.log('target: ', e.target.innerText);
+  const handleClick = function (e) {
     props.deleteItem(e.target.innerText);
-  }
+  };
   //Generate the list of items in the wishlist based on the wishlist prop
   const generateList = () => {
     return props.wishList.map((item) => {
-      return <li className={'wishlist-item'} onClick={handleClick}>{item}</li>;
+      return (
+        <li className={"wishlist-item"} onClick={handleClick}>
+          {item}
+        </li>
+      );
     });
   };
   //Check for duplicate when adding to list
   const checkDuplicate = function () {
-    if (props.wishList.find((element) => element === input)) {
-      console.log("Duplicate");
-      return true;
-    } else {
-      return false;
-    }
+    return props.wishList.find((element) => element === input);
   };
   return (
     <div className="wrapper">

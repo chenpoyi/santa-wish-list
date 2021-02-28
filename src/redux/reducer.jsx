@@ -11,15 +11,11 @@ const INITIAL_STATE = {
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_ITEM: //Add new item to wishlist
-      console.log('HELLO:', action)
       return {
         wishList: [...state.wishList, action.payload],
       };
     case DELETE_ITEM: //Remove selected item from wishlist
-    console.log('payload:', action.payload);
-    console.log('wishlist:', state.wishList)
       const itemIndex = state.wishList.indexOf(action.payload)
-      console.log('to delete:', itemIndex);
       return {
         wishList: [ ...state.wishList.slice(0, itemIndex),
           ...state.wishList.slice(itemIndex + 1)],
